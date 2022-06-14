@@ -1,0 +1,37 @@
+# Data
+data_dir: "./data"
+dtype: "kdd17"
+n_train_stock: 40  # number of training stocks to construct the universe
+n_sample: 5  # number of samples per window size and per single stock
+n_lag: 1
+n_stock: 3  # number of iteration(stock) to sample per window size, total will be `n_stocks` * `n_sample`
+keep_support_history: true  # query data will starting from support starting date
+show_y_index: false  # for debug purpose
+
+# Model
+feature_size: 11  # no need to change this
+hidden_size: 64
+output_size: 1  # 1 == 2 setting
+num_layers: 2
+drop_rate: 0.0  # no use
+inner_lr_init: 1
+finetuning_lr_init: 0.1
+
+# Trainer
+exp_name: 'kdd'
+train: False
+log_dir: './logging'
+total_steps: 100000
+n_inner_step: 5
+n_finetuning_step: 0
+n_valid_step: 10
+n_test_step: 500
+every_valid_step: 500
+beta: 0.001  # KLD Loss
+gamma: 1.0e-8  # z penalty
+lambda1: 1.0e-9  # weight decay
+lambda2: 0.1 # orthogonality penalty
+outer_lr: 1.0e-4
+clip_value: 0.1
+device: 'cuda'
+print_step: 250
